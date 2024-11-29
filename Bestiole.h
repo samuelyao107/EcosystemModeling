@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include "IBestiole.h"
+
 using namespace std;
 
 
@@ -25,9 +27,19 @@ private :
 private :
    int               identite;
    int               x, y;
+   int               age; //en nombre de tours
    double            cumulX, cumulY;
    double            orientation;
    double            vitesse;
+   double            death = 0;                      //probabilité de mourir
+   double            omega;                         //coefficient Carapace
+   double            nu;                           //coefficient Nageoire
+   double            deltaO;                        //coefficient Oreille
+   double            psi;                          //coefficient Camouflage
+   double            alpha;                        //Champ angulaire
+   double            deltaY;                      //Distance Yeux
+   double            detectionY                  //Capacite de detection des yeux
+   double            detectionO                  //Capacite de detection Oreille 
 
    T               * couleur;
 
@@ -43,6 +55,9 @@ public :                                           // Forme canonique :
    void draw( UImg & support );
 
    bool jeTeVois( const Bestiole & b ) const;
+   bool jeTEntends( const Bestiole & b ) const;
+   void actionCarapace();
+   void actionNageoire();
 
    void initCoords( int xLim, int yLim );
 

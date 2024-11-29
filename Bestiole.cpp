@@ -135,13 +135,13 @@ bool operator==( const Bestiole & b1, const Bestiole & b2 )
 }
 
 
-bool Bestiole::jeTeVois( const Bestiole & b ) const
-{
+//bool Bestiole::jeTeVois( const Bestiole & b ) const
+//{
 
-   double         dist;
+ //  double         dist;
 
 
-   dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
-   return ( dist <= LIMITE_VUE );
+ //  dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
+ //  return ( dist <= LIMITE_VUE );
 
-}
+//}
