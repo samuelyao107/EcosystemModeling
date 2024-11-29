@@ -21,6 +21,16 @@ private :
    static const double     AFF_SIZE;
    static const double     MAX_VITESSE;
    static const double     LIMITE_VUE;
+   static const double     ALPHA_MAX;
+   static const double     ALPHA_MIN;
+   static const double     DELTAY_MAX;
+   static const double     DELTAY_MIN;
+   static const double     DELTAO_MAX;
+   static const double     DELTAO_MIN;
+   static const double     DELTAO_MAX;
+   static const double     DETECTIONY_MIN;
+   static const double     DETECTIONO_MAX;
+  
 
    static int              next;
 

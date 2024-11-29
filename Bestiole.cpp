@@ -10,6 +10,16 @@ const double      Bestiole::AFF_SIZE = 8.;
 const double      Bestiole::MAX_VITESSE = 10.;
 const double      Bestiole::LIMITE_VUE = 30.;
 
+   static const double     Bestiole::ALPHA_MAX = 1.;
+   static const double     Bestiole::ALPHA_MIN= 0.;
+   static const double     Bestiole::DELTAY_MAX= 1.;
+   static const double     Bestiole::DELTAY_MIN= 0.;
+   static const double     Bestiole::DELTAO_MAX= 1.;
+   static const double     Bestiole::DELTAO_MIN= 0.;
+   static const double     Bestiole::DELTAO_MAX= 1.;
+   static const double     Bestiole::DETECTIONY_MIN= 0.;
+   static const double     Bestiole::DETECTIONO_MAX= 1.;
+
 int               Bestiole::next = 0;
 
 
