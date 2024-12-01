@@ -6,7 +6,6 @@
 
 #include <iostream>
 
-#include "IBestiole.h"
 
 using namespace std;
 
@@ -21,15 +20,21 @@ private :
    static const double     AFF_SIZE;
    static const double     MAX_VITESSE;
    static const double     LIMITE_VUE;
-   static const double     ALPHA_MAX;
-   static const double     ALPHA_MIN;
-   static const double     DELTAY_MAX;
-   static const double     DELTAY_MIN;
-   static const double     DELTAO_MAX;
-   static const double     DELTAO_MIN;
-   static const double     DELTAO_MAX;
-   static const double     DETECTIONY_MIN;
-   static const double     DETECTIONO_MAX;
+   static const double CHAMP_ANGULAIRE_MAX;
+   static const double CHAMP_ANGULAIRE_MIN;
+   static const double DISTANCE_YEUX_MAX;
+   static const double DISTANCE_YEUX_MIN;
+   static const double CAPACITE_DETECTION_YEUX_MAX;
+   static const double CAPACITE_DETECTION_YEUX_MIN;
+   static const double PLAGE_OREILLES_MAX;
+   static const double PLAGE_OREILLES_MIN;
+   static const double CAPACITE_DETECTION_OREILLE_MAX;
+   static const double CAPACITE_DETECTION_OREILLE_MIN;
+   static const double MULTIPLICATEUR_NAGEOIRE_MAX;
+   static const double REDUCTEUR_CARAPACE_MAX;
+   static const double REDUCTEUR_CARAPACE_MORT_MAX;
+   static const double CAMOUFLAGE_MAX;
+   static const double CAMOUFLAGE_MIN;
   
 
    static int              next;
@@ -38,20 +43,27 @@ private :
    int               identite;
    int               x, y;
    int               age; //en nombre de tours
+
+   bool hasEye;
+   bool hasEar;
+   bool hasCamouflage;
+   bool hasNageoire;
+   bool hasCarapace;
    double            cumulX, cumulY;
    double            orientation;
    double            vitesse;
-   double            death = 0;                      //probabilité de mourir
-   double            omega;                         //coefficient Carapace
-   double            nu;                           //coefficient Nageoire
-   double            deltaO;                        //coefficient Oreille
-   double            psi;                          //coefficient Camouflage
-   double            alpha;                        //Champ angulaire
-   double            deltaY;                      //Distance Yeux
-   double            detectionY                  //Capacite de detection des yeux
-   double            detectionO                  //Capacite de detection Oreille 
+   double            champ_angulaire;
+   double            distance_yeux;
+   double            capacite_detection_yeux; 
+   double            plage_oreilles; 
+   double            capacite_detection_oreille; 
+   double            multiplicateur_nageoire;
+   double            reducteur_carapace;
+   double            reducteur_carapace_mort;
+   double            camouflage;
+   
 
-   T               * couleur;
+   T                 * couleur;
 
 private :
    void bouge( int xLim, int yLim );
@@ -65,11 +77,18 @@ public :                                           // Forme canonique :
    void draw( UImg & support );
 
    bool jeTeVois( const Bestiole & b ) const;
+
    bool jeTEntends( const Bestiole & b ) const;
+
    void actionCarapace();
+   
    void actionNageoire();
 
    void initCoords( int xLim, int yLim );
+
+   double aleatoireEntre(double min, double max);
+
+  
 
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
 
