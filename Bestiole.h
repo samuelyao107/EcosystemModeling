@@ -49,6 +49,8 @@ private :
    bool hasCamouflage;
    bool hasNageoire;
    bool hasCarapace;
+
+   double            death;
    double            cumulX, cumulY;
    double            orientation;
    double            vitesse;
@@ -87,6 +89,18 @@ public :                                           // Forme canonique :
    void initCoords( int xLim, int yLim );
 
    double aleatoireEntre(double min, double max);
+
+   double getX() const;
+
+   double getY() const;
+
+   double getDeath();
+
+   double getReducteurCarapaceMort();
+
+   void setDeath(double _death);
+
+   bool gethasCarapace();
 
   
 

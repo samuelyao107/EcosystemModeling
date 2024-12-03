@@ -46,6 +46,7 @@ Bestiole::Bestiole( void )
    hasNageoire= rand() % 2; 
    hasCarapace= rand() % 2;   
 
+   death = aleatoireEntre(0, 1) ;
    champ_angulaire = aleatoireEntre(CHAMP_ANGULAIRE_MIN, CHAMP_ANGULAIRE_MAX) ;
    distance_yeux= aleatoireEntre(DISTANCE_YEUX_MIN, DISTANCE_YEUX_MAX) ;
    capacite_detection_yeux= aleatoireEntre(CAPACITE_DETECTION_YEUX_MIN, CAPACITE_DETECTION_YEUX_MAX) ; 
@@ -176,12 +177,35 @@ void Bestiole::draw( UImg & support )
 
 }
 
+double Bestiole::getX() const{
+   return x;
+}
+
+double Bestiole::getY() const{
+   return y;
+}
 
 bool operator==( const Bestiole & b1, const Bestiole & b2 )
 {
 
    return ( b1.identite == b2.identite );
 
+}
+
+double Bestiole::getDeath(){
+   return death;
+}
+
+void Bestiole::setDeath(double _death){
+   death = _death;
+}
+
+bool Bestiole::gethasCarapace(){
+   return hasCarapace;
+}
+
+double Bestiole::getReducteurCarapaceMort(){
+   return reducteur_carapace_mort;
 }
 
 
