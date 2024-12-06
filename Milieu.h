@@ -30,11 +30,14 @@ public :
 
    void step( void );
 
+
+
    void addMember( const Bestiole & b ) {
       //listeBestioles.push_back(b); listeBestioles.back().initCoords(width, height);
 
         std::unique_ptr<Bestiole> newBestiole = std::make_unique<Bestiole>(b); 
         newBestiole->initCoords(width, height);
+        newBestiole->init();
         listeBestioles.push_back(std::move(newBestiole));
       
       }

@@ -255,3 +255,12 @@ void Bestiole::actionNageoire() {
       vitesse *= multiplicateur_nageoire ;
    }
 }
+
+void Bestiole::init(){
+   if(this->hasCarapace){
+      this->actionCarapace();
+   }
+   if (this->hasNageoire){
+      this ->actionNageoire();
+   }
+}

@@ -85,7 +85,7 @@ public :                                           // Forme canonique :
    void actionCarapace();
    
    void actionNageoire();
-
+   void init();
    void initCoords( int xLim, int yLim );
 
    double aleatoireEntre(double min, double max);
