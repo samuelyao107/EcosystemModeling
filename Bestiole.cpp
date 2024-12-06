@@ -9,13 +9,13 @@
 const double     Bestiole::AFF_SIZE = 8.;
 const double     Bestiole::MAX_VITESSE = 10.;
 const double     Bestiole::LIMITE_VUE = 30.;
-const double     Bestiole::CHAMP_ANGULAIRE_MAX = 50;
+const double     Bestiole::CHAMP_ANGULAIRE_MAX = 0.90;
 const double     Bestiole::CHAMP_ANGULAIRE_MIN = 0;
-const double     Bestiole::DISTANCE_YEUX_MAX = 50;
+const double     Bestiole::DISTANCE_YEUX_MAX = 270;
 const double     Bestiole::DISTANCE_YEUX_MIN = 0;
 const double     Bestiole::CAPACITE_DETECTION_YEUX_MAX = 1.;
 const double     Bestiole::CAPACITE_DETECTION_YEUX_MIN = 0.;
-const double     Bestiole::PLAGE_OREILLES_MAX= 10.;
+const double     Bestiole::PLAGE_OREILLES_MAX= 75.;
 const double     Bestiole::PLAGE_OREILLES_MIN= 0.;
 const double     Bestiole::CAPACITE_DETECTION_OREILLE_MAX = 1.;
 const double     Bestiole::CAPACITE_DETECTION_OREILLE_MIN = 0.;
@@ -166,6 +166,18 @@ void Bestiole::action( Milieu & monMilieu )
 
 
 void Bestiole::draw(UImg& support) {
+    drawBody(support);         // Corps de la bestiole
+    drawTail(support);         // Queue
+    drawFins(support);         // Nageoires
+    drawEars(support);         // Cercle d'audition
+    drawCamouflage(support);   // Effet de camouflage
+    drawConeVision(support);   // Cône de vision
+}
+
+
+
+
+void Bestiole::drawBody(UImg& support) {
     if (hasCarapace) {
         // Avec carapace : carré et ellipse
         double tailleCarapace = AFF_SIZE + 3;
@@ -185,57 +197,60 @@ void Bestiole::draw(UImg& support) {
         double yEllipse = y + sin(orientation) * AFF_SIZE / 2;
         support.draw_ellipse(xEllipse, yEllipse, AFF_SIZE / 1.5, AFF_SIZE / 3., -orientation / M_PI * 180., couleur);
     }
+}
 
-    // Dessin de la queue
+void Bestiole::drawTail(UImg& support) {
     double xt = x + cos(orientation) * AFF_SIZE / 2.1;
     double yt = y - sin(orientation) * AFF_SIZE / 2.1;
     support.draw_circle(xt, yt, AFF_SIZE / 3, couleur);
+}
 
-    // Nageoires
+
+void Bestiole::drawFins(UImg& support) {
     if (hasNageoire) {
-        T couleurContour[3] = {0, 0, 0};
-        T couleurNageoire[3] = {0, 0, 255};
-        double longueurNageoire = AFF_SIZE * 2.0;
-        int epaisseur = 3;
+        T couleurContour[3] = {0, 0, 0};  // Noir pour le contour
+        T couleurNageoire[3] = {0, 0, 255};  // Bleu pour les nageoires
 
-        support.draw_line(
-            x, y,
-            x + cos(orientation + M_PI / 2) * (longueurNageoire + 2),
-            y - sin(orientation + M_PI / 2) * (longueurNageoire + 2),
-            couleurContour, epaisseur
-        );
+        double longueurNageoire = AFF_SIZE * 0.8; // Longueur des nageoires
+        double largeurNageoire = AFF_SIZE * 2.0;  // Largeur des nageoires
 
-        support.draw_line(
-            x, y,
-            x + cos(orientation - M_PI / 2) * (longueurNageoire + 2),
-            y - sin(orientation - M_PI / 2) * (longueurNageoire + 2),
-            couleurContour, epaisseur
-        );
+        // Calcul des sommets des triangles pour les nageoires
+        double xLeftBase = x + cos(orientation + M_PI / 2) * largeurNageoire;
+        double yLeftBase = y - sin(orientation + M_PI / 2) * largeurNageoire;
 
-        support.draw_line(
-            x, y,
-            x + cos(orientation + M_PI / 2) * longueurNageoire,
-            y - sin(orientation + M_PI / 2) * longueurNageoire,
-            couleurNageoire, epaisseur
-        );
+        double xRightBase = x + cos(orientation - M_PI / 2) * largeurNageoire;
+        double yRightBase = y - sin(orientation - M_PI / 2) * largeurNageoire;
 
-        support.draw_line(
-            x, y,
-            x + cos(orientation - M_PI / 2) * longueurNageoire,
-            y - sin(orientation - M_PI / 2) * longueurNageoire,
-            couleurNageoire, epaisseur
-        );
+        double xLeftTip = xLeftBase + cos(orientation) * longueurNageoire;
+        double yLeftTip = yLeftBase - sin(orientation) * longueurNageoire;
+
+        double xRightTip = xRightBase + cos(orientation) * longueurNageoire;
+        double yRightTip = yRightBase - sin(orientation) * longueurNageoire;
+
+        // Dessiner la nageoire gauche
+        support.draw_triangle(xLeftBase, yLeftBase, xLeftTip, yLeftTip, x, y, couleurNageoire);
+        support.draw_triangle(xLeftBase, yLeftBase, xLeftTip, yLeftTip, x, y, couleurContour, 1, 'c'); // Contour
+
+        // Dessiner la nageoire droite
+        support.draw_triangle(xRightBase, yRightBase, xRightTip, yRightTip, x, y, couleurNageoire);
+        support.draw_triangle(xRightBase, yRightBase, xRightTip, yRightTip, x, y, couleurContour, 1, 'c'); // Contour
     }
+}
 
-    // Cercles d'audition
+
+
+
+void Bestiole::drawEars(UImg& support) {
     if (hasEar) {
         T couleurOreilles[3] = {0, 255, 0};
         double rayonAudition = plage_oreilles * 1.5;
-        float transparence = 0.5f;
+        float transparence = 0.15f;
         support.draw_circle(x, y, rayonAudition, couleurOreilles, transparence);
     }
+}
 
-    // Camouflage
+
+void Bestiole::drawCamouflage(UImg& support) {
     if (hasCamouflage) {
         T couleurNuage[3] = {100, 100, 100};
         float transparence = 0.3f;
@@ -249,17 +264,24 @@ void Bestiole::draw(UImg& support) {
             double yNuage = y + sin(angle) * distance;
 
             double rayonPetitCercle = rayonBase * (0.1 + static_cast<double>(rand()) / RAND_MAX * 0.15);
-
             support.draw_circle(xNuage, yNuage, rayonPetitCercle, couleurNuage, transparence);
         }
     }
+}
 
-    // Cône de vision
+
+void Bestiole::drawConeVision(UImg& support) {
     if (hasEye) {
         T couleurCone[3] = {255, 0, 0};
-        float transparenceCone = 0.3f;
-        double angleStart = orientation - champ_angulaire / 2;
-        double angleEnd = orientation + champ_angulaire / 2;
+        float transparenceCone = 0.15f;
+
+        double orientationNormalized = fmod(orientation, 2 * M_PI);
+        if (orientationNormalized < 0) {
+            orientationNormalized += 2 * M_PI;
+        }
+
+        double angleStart = orientationNormalized - champ_angulaire / 2;
+        double angleEnd = orientationNormalized + champ_angulaire / 2;
 
         double x1 = x + cos(angleStart) * distance_yeux;
         double y1 = y - sin(angleStart) * distance_yeux;
@@ -269,6 +291,9 @@ void Bestiole::draw(UImg& support) {
         support.draw_triangle(x, y, x1, y1, x2, y2, couleurCone, transparenceCone);
     }
 }
+
+
+
 
 
 
