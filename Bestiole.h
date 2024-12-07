@@ -102,6 +102,18 @@ public :                                           // Forme canonique :
 
    bool gethasCarapace();
 
+   void drawBody(UImg& support);
+
+   void drawTail(UImg& support);
+
+   void drawFins(UImg& support);
+
+   void drawEars(UImg& support) ;
+
+   void drawCamouflage(UImg& support);
+
+   void drawConeVision(UImg& support);
+
   
 
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
