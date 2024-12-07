@@ -29,8 +29,9 @@ const double     Bestiole::CAMOUFLAGE_MIN= 0.;
 int               Bestiole::next = 0;
 
 
-Bestiole::Bestiole( void )
+Bestiole::Bestiole(std::unique_ptr<IComportementStrategy> &&strategy): strategy_(std::move(strategy))
 {
+  
 
    identite = ++next;
 
@@ -44,8 +45,8 @@ Bestiole::Bestiole( void )
    hasEar= rand() % 2; 
    hasCamouflage= rand() % 2; 
    hasNageoire= rand() % 2; 
-   hasCarapace= rand() % 2;   
-
+   hasCarapace= rand() % 2;  
+   cible = nullptr;
    death = aleatoireEntre(0, 1) ;
    champ_angulaire = aleatoireEntre(CHAMP_ANGULAIRE_MIN, CHAMP_ANGULAIRE_MAX) ;
    distance_yeux= aleatoireEntre(DISTANCE_YEUX_MIN, DISTANCE_YEUX_MAX) ;
@@ -293,10 +294,6 @@ void Bestiole::drawConeVision(UImg& support) {
 }
 
 
-
-
-
-
 double Bestiole::getX() const{
    return x;
 }
@@ -382,5 +379,27 @@ void Bestiole::init(){
    }
    if (this->hasNageoire){
       this ->actionNageoire();
-   }
+   }   
 }
+
+void Bestiole::set_strategy(std::unique_ptr<IComportementStrategy> &&strategy)
+    {
+        strategy_ = std::move(strategy);
+    }
+void Bestiole::applyStrategy(Bestiole & b, Milieu & m){
+   if(strategy_){
+      strategy_->behavior(b, m);
+   }
+}  
+
+double Bestiole::getOrientation(){
+   return orientation;
+}
+
+void Bestiole::setOrientation(double _orientation){
+   orientation = _orientation;
+}
+
+ double Bestiole::getVitesse(){
+   return vitesse;
+ }

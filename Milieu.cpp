@@ -37,6 +37,9 @@ void Milieu::step(void)
     // Nettoyer l'écran avant d'afficher les bestioles
     cimg_forXY(*this, x, y) fillC(x, y, 0, white[0], white[1], white[2]);
       //std::vector<Bestiole>::iterator
+    for ( auto it = listeBestioles.begin(); it != listeBestioles.end();it++){
+        it->get()->applyStrategy(**it, *this);
+    }
     for ( auto it = listeBestioles.begin(); it != listeBestioles.end();)
     {
         bool dead = false;

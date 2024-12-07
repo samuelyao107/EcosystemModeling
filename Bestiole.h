@@ -6,6 +6,9 @@
 
 #include <iostream>
 
+#include <memory>
+
+#include "IComportementStrategy.h"
 
 using namespace std;
 
@@ -39,6 +42,9 @@ private :
 
    static int              next;
 
+
+   
+
 private :
    int               identite;
    int               x, y;
@@ -49,6 +55,7 @@ private :
    bool hasCamouflage;
    bool hasNageoire;
    bool hasCarapace;
+ 
 
    double            death;
    double            cumulX, cumulY;
@@ -67,11 +74,15 @@ private :
 
    T                 * couleur;
 
+   std::unique_ptr<IComportementStrategy> strategy_;
+
+
+
 private :
    void bouge( int xLim, int yLim );
 
 public :                                           // Forme canonique :
-   Bestiole( void );                               // Constructeur par defaut
+   Bestiole( std::unique_ptr<IComportementStrategy> &&strategy = {} );                               // Constructeur par defaut
    Bestiole( const Bestiole & b );                 // Constructeur de copies
    ~Bestiole( void );                              // Destructeur
                                                    // Operateur d'affectation binaire par defaut
@@ -102,6 +113,8 @@ public :                                           // Forme canonique :
 
    bool gethasCarapace();
 
+   void drawConeVision(UImg& support) ;
+
    void drawBody(UImg& support);
 
    void drawTail(UImg& support);
@@ -111,10 +124,20 @@ public :                                           // Forme canonique :
    void drawEars(UImg& support) ;
 
    void drawCamouflage(UImg& support);
+   
+   void set_strategy(std::unique_ptr<IComportementStrategy> &&strategy);
+   
+   void applyStrategy(Bestiole & b, Milieu & m);
 
-   void drawConeVision(UImg& support);
+   double getOrientation();
 
-  
+   void setOrientation(double _orientation);
+
+   double getVitesse();
+
+   Bestiole* cible  ;
+
+
 
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
 

@@ -4,11 +4,16 @@
 
 #include "UImg.h"
 #include "Bestiole.h"
+#include "Gregaire.h"
+#include "Peureuse.h"
+#include "Kamikaze.h"
+#include "Prevoyant.h"
 #include <memory>
 #include <iostream>
 #include <vector>
 
-using namespace std;
+
+
 
 
 class Milieu : public UImg
@@ -30,7 +35,9 @@ public :
 
    void step( void );
 
-
+   std::vector<std::unique_ptr<Bestiole>>& getListeBestioles() {
+        return listeBestioles;
+    }
 
    void addMember( const Bestiole & b ) {
       //listeBestioles.push_back(b); listeBestioles.back().initCoords(width, height);
@@ -38,6 +45,7 @@ public :
         std::unique_ptr<Bestiole> newBestiole = std::make_unique<Bestiole>(b); 
         newBestiole->initCoords(width, height);
         newBestiole->init();
+        //newBestiole->set_strategy(std::make_unique<Prevoyant>());
         listeBestioles.push_back(std::move(newBestiole));
       
       }
