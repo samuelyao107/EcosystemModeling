@@ -39,13 +39,22 @@ public :
         return listeBestioles;
     }
 
-   void addMember( const Bestiole & b ) {
+   void addMember( const Bestiole & b, int i ) {
       //listeBestioles.push_back(b); listeBestioles.back().initCoords(width, height);
 
         std::unique_ptr<Bestiole> newBestiole = std::make_unique<Bestiole>(b); 
         newBestiole->initCoords(width, height);
         newBestiole->init();
-        newBestiole->set_strategy(std::make_unique<Peureuse>());
+        if(i == 1){
+         newBestiole->set_strategy(std::make_unique<Gregaire>());
+        }else if(i==2){
+         newBestiole->set_strategy(std::make_unique<Kamikaze>());
+        }
+        else if(i==3){
+         newBestiole->set_strategy(std::make_unique<Peureuse>());
+        }else{
+         newBestiole->set_strategy(std::make_unique<Prevoyant>());
+        }
         listeBestioles.push_back(std::move(newBestiole));
       
       }

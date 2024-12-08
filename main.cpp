@@ -1,4 +1,4 @@
-/*
+
 #include "Aquarium.h"
 #include "Milieu.h"
 #include "Bestiole.h"
@@ -56,26 +56,26 @@ int main()
     // Create and add Bestiole instances
     for (int i = 0; i < kamikazeCount; ++i) {
         Bestiole b;
-        b.set_strategy(std::make_unique<Kamikaze>());
-        ecosysteme.getMilieu().addMember(b);
+       // b.set_strategy(std::make_unique<Kamikaze>());
+        ecosysteme.getMilieu().addMember(b,2);
     }
 
     for (int i = 0; i < prevoyantCount; ++i) {
         Bestiole b;
-        b.set_strategy(std::make_unique<Prevoyant>());
-        ecosysteme.getMilieu().addMember(b);
+       // b.set_strategy(std::make_unique<Prevoyant>());
+        ecosysteme.getMilieu().addMember(b,4);
     }
 
     for (int i = 0; i < peureuseCount; ++i) {
         Bestiole b;
         b.set_strategy(std::make_unique<Peureuse>());
-        ecosysteme.getMilieu().addMember(b);
+        ecosysteme.getMilieu().addMember(b,3);
     }
 
     for (int i = 0; i < gregaireCount; ++i) {
         Bestiole b;
         b.set_strategy(std::make_unique<Gregaire>());
-        ecosysteme.getMilieu().addMember(b);
+        ecosysteme.getMilieu().addMember(b,1);
     }
 
     // Run the simulation
@@ -83,7 +83,6 @@ int main()
 
     return 0;
 }
-*/
 
 
 
@@ -100,7 +99,8 @@ int main()
 
 
 
-#include "Aquarium.h"
+
+/*#include "Aquarium.h"
 #include "Milieu.h"
 #include "Bestiole.h"
 
@@ -122,3 +122,4 @@ int main()
    return 0;
 
 }
+*/ 
