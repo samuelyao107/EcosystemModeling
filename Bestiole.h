@@ -78,6 +78,8 @@ private :
 
 
 
+
+
 private :
    void bouge( int xLim, int yLim );
 
@@ -126,6 +128,7 @@ public :                                           // Forme canonique :
    void drawCamouflage(UImg& support);
    
    void set_strategy(std::unique_ptr<IComportementStrategy> &&strategy);
+
    
    void applyStrategy(Bestiole & b, Milieu & m);
 
@@ -136,6 +139,9 @@ public :                                           // Forme canonique :
    double getVitesse();
 
    Bestiole* cible  ;
+
+   void setColorByBehavior();
+
 
 
 

@@ -1,6 +1,14 @@
 #include "Bestiole.h"
 
+
+
 #include "Milieu.h"
+
+
+#include "Kamikaze.h"
+#include "Prevoyant.h"
+#include "Peureuse.h"
+#include "Gregaire.h"
 
 #include <cstdlib>
 #include <cmath>
@@ -58,9 +66,7 @@ Bestiole::Bestiole(std::unique_ptr<IComportementStrategy> &&strategy): strategy_
    reducteur_carapace_mort= aleatoireEntre(1.0, REDUCTEUR_CARAPACE_MORT_MAX) ;
    camouflage= aleatoireEntre(CAMOUFLAGE_MIN, CAMOUFLAGE_MAX) ;
    couleur = new T[ 3 ];
-   couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-   couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-   couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+   setColorByBehavior();
 
 }
 
@@ -100,6 +106,7 @@ Bestiole::Bestiole(const Bestiole & b)
     couleur = new T[3];
     memcpy(couleur, b.couleur, 3 * sizeof(T));
 }
+
 
 
 
@@ -293,6 +300,31 @@ void Bestiole::drawConeVision(UImg& support) {
     }
 }
 
+void Bestiole::setColorByBehavior() {
+    if (dynamic_cast<Kamikaze*>(strategy_.get())) {
+        couleur[0] = 255; // Rouge
+        couleur[1] = 0;
+        couleur[2] = 0;
+    } else if (dynamic_cast<Prevoyant*>(strategy_.get())) {
+        couleur[0] = 0;   // Bleu
+        couleur[1] = 0;
+        couleur[2] = 255;
+    } else if (dynamic_cast<Peureuse*>(strategy_.get())) {
+        couleur[0] = 0;   // Vert
+        couleur[1] = 255;
+        couleur[2] = 0;
+    } else if (dynamic_cast<Gregaire*>(strategy_.get())) {
+        couleur[0] = 255; // Jaune
+        couleur[1] = 255;
+        couleur[2] = 0;
+    } else {
+        couleur[0] = 128; // Gris par défaut
+        couleur[1] = 128;
+        couleur[2] = 128;
+    }
+}
+
+
 
 double Bestiole::getX() const{
    return x;
@@ -385,6 +417,7 @@ void Bestiole::init(){
 void Bestiole::set_strategy(std::unique_ptr<IComportementStrategy> &&strategy)
     {
         strategy_ = std::move(strategy);
+        setColorByBehavior();
     }
 void Bestiole::applyStrategy(Bestiole & b, Milieu & m){
    if(strategy_){
