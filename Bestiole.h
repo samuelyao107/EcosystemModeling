@@ -134,6 +134,7 @@ public :                                           // Forme canonique :
    void setOrientation(double _orientation);
 
    double getVitesse();
+   void setVitesse(double _vitesse);
 
    Bestiole* cible  ;
 

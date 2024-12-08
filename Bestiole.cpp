@@ -157,7 +157,9 @@ void Bestiole::bouge( int xLim, int yLim )
 
 }
 
-
+void Bestiole::setVitesse(double _vitesse){
+   vitesse = _vitesse;
+}
 void Bestiole::action( Milieu & monMilieu )
 {
 

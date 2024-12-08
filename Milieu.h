@@ -45,7 +45,7 @@ public :
         std::unique_ptr<Bestiole> newBestiole = std::make_unique<Bestiole>(b); 
         newBestiole->initCoords(width, height);
         newBestiole->init();
-        //newBestiole->set_strategy(std::make_unique<Prevoyant>());
+        newBestiole->set_strategy(std::make_unique<Peureuse>());
         listeBestioles.push_back(std::move(newBestiole));
       
       }

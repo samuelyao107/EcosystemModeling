@@ -1,10 +1,11 @@
 #include "Peureuse.h"
 #include "Bestiole.h"  
 #include "Milieu.h"
-
+#include <iostream>
 
 
 void Peureuse::behavior(Bestiole & b, Milieu & milieu) {
+
     int nb=0;
     for(auto it = milieu.getListeBestioles().begin(); it != milieu.getListeBestioles().end();it++){
         if(!(**it ==b)){
@@ -14,9 +15,11 @@ void Peureuse::behavior(Bestiole & b, Milieu & milieu) {
         }
        
     }
-    if(nb>5){
+    if(nb>=1){
+        std::cout<<nb<<std::endl;
         double orientation = -b.getOrientation();
         b.setOrientation(orientation);
+        b.setVitesse(-b.getVitesse());
     }
    
 }
