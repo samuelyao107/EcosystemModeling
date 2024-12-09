@@ -6,6 +6,7 @@
 #include "Peureuse.h"
 #include "Kamikaze.h"
 #include "Prevoyant.h"
+#include "Multi.h"
 #include <iostream>
 #include <string>
 
@@ -35,6 +36,9 @@ int main()
     std::cin >> gregairePercent;
    
 
+    std::cout << "Enter the percentage of Multi Bestioles: "<<std::endl;
+    std::cin >> multiPercent;
+
     // Check if percentages sum to 100
     while (kamikazePercent + prevoyantPercent + peureusePercent + gregairePercent!= 100) {
         std::cout << "Percentages do not add up to 100. Please enter again.\n"<<std::endl;
@@ -46,14 +50,15 @@ int main()
         cin >> peureusePercent;
         std::cout << "Gregarie: "<<std::endl;
         cin >> gregairePercent;
-       
+
     }
 
     // Calculate number of each type
     int kamikazeCount = totalBestioles * kamikazePercent / 100;
     int prevoyantCount = totalBestioles * prevoyantPercent / 100;
     int peureuseCount = totalBestioles * peureusePercent / 100;
-    int gregaireCount = totalBestioles - kamikazeCount - prevoyantCount - peureuseCount;
+    int gregaireCount = totalBestioles * gregairePercent / 100;
+    int multiCount = totalBestioles - kamikazeCount - prevoyantCount - peureuseCount - gregaireCount;
 
 
     // Create and add Bestiole instances
@@ -79,6 +84,13 @@ int main()
         Bestiole b;
         b.set_strategy(std::make_unique<Gregaire>());
         ecosysteme.getMilieu().addMember(b,1);
+
+    for (int i = 0; i < multiCount; ++i) {
+        Bestiole b;
+        //b.set_strategy(std::make_unique<Multi>());
+        ecosysteme.getMilieu().addMember(b);
+    }
+
     }
 
  
