@@ -33,9 +33,10 @@ int main()
 
     std::cout << "Enter the percentage of Gregaire Bestioles: "<<std::endl;
     std::cin >> gregairePercent;
+   
 
     // Check if percentages sum to 100
-    while (kamikazePercent + prevoyantPercent + peureusePercent + gregairePercent != 100) {
+    while (kamikazePercent + prevoyantPercent + peureusePercent + gregairePercent!= 100) {
         std::cout << "Percentages do not add up to 100. Please enter again.\n"<<std::endl;
         std::cout << "Kamikaze: "<<std::endl;
         std::cin >> kamikazePercent;
@@ -45,6 +46,7 @@ int main()
         cin >> peureusePercent;
         std::cout << "Gregarie: "<<std::endl;
         cin >> gregairePercent;
+       
     }
 
     // Calculate number of each type
@@ -52,6 +54,7 @@ int main()
     int prevoyantCount = totalBestioles * prevoyantPercent / 100;
     int peureuseCount = totalBestioles * peureusePercent / 100;
     int gregaireCount = totalBestioles - kamikazeCount - prevoyantCount - peureuseCount;
+
 
     // Create and add Bestiole instances
     for (int i = 0; i < kamikazeCount; ++i) {
@@ -77,6 +80,8 @@ int main()
         b.set_strategy(std::make_unique<Gregaire>());
         ecosysteme.getMilieu().addMember(b,1);
     }
+
+ 
 
     // Run the simulation
     ecosysteme.run();
