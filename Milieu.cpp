@@ -2,7 +2,7 @@
 #include <cmath> 
 #include <cstdlib>
 #include <ctime>
-
+#include <atomic>
 
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
@@ -37,6 +37,7 @@ void Milieu::step(void)
     // Nettoyer l'écran avant d'afficher les bestioles
     cimg_forXY(*this, x, y) fillC(x, y, 0, white[0], white[1], white[2]);
       //std::vector<Bestiole>::iterator
+  
     for ( auto it = listeBestioles.begin(); it != listeBestioles.end();it++){
         it->get()->applyStrategy(**it, *this);
     }

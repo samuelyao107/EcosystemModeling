@@ -8,6 +8,7 @@
 #include "Peureuse.h"
 #include "Kamikaze.h"
 #include "Prevoyant.h"
+#include "Multi.h"
 #include <memory>
 #include <iostream>
 #include <vector>
@@ -52,8 +53,10 @@ public :
         }
         else if(i==3){
          newBestiole->set_strategy(std::make_unique<Peureuse>());
-        }else{
+        }else if(i==4){
          newBestiole->set_strategy(std::make_unique<Prevoyant>());
+        }else{
+         newBestiole->set_strategy(std::make_unique<Multi>());
         }
         listeBestioles.push_back(std::move(newBestiole));
       

@@ -55,7 +55,8 @@ private :
    bool hasCamouflage;
    bool hasNageoire;
    bool hasCarapace;
- 
+   
+
 
    double            death;
    double            cumulX, cumulY;
@@ -142,6 +143,8 @@ public :                                           // Forme canonique :
    Bestiole* cible  ;
 
    void setColorByBehavior();
+
+  
 
 
 

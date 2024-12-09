@@ -45,7 +45,7 @@ void Aquarium::run( void )
          cout << " (" << key() << ")" << endl;
          if ( is_keyESC() ) close();
       }
-
+    
       flotte->step();
       display( *flotte );
 

@@ -21,7 +21,7 @@ int main()
     const int totalBestioles = 50;
 
     // User input for percentages
-    int kamikazePercent, prevoyantPercent, peureusePercent, gregairePercent;
+    int kamikazePercent, prevoyantPercent, peureusePercent, gregairePercent, multiPercent;
 
     std::cout << "Enter the percentage of Kamikaze Bestioles: "<<std::endl;
     std::cin >> kamikazePercent;
@@ -40,7 +40,7 @@ int main()
     std::cin >> multiPercent;
 
     // Check if percentages sum to 100
-    while (kamikazePercent + prevoyantPercent + peureusePercent + gregairePercent!= 100) {
+    while (kamikazePercent + prevoyantPercent + peureusePercent + gregairePercent+ multiPercent!= 100) {
         std::cout << "Percentages do not add up to 100. Please enter again.\n"<<std::endl;
         std::cout << "Kamikaze: "<<std::endl;
         std::cin >> kamikazePercent;
@@ -76,19 +76,19 @@ int main()
 
     for (int i = 0; i < peureuseCount; ++i) {
         Bestiole b;
-        b.set_strategy(std::make_unique<Peureuse>());
+        //b.set_strategy(std::make_unique<Peureuse>());
         ecosysteme.getMilieu().addMember(b,3);
     }
 
     for (int i = 0; i < gregaireCount; ++i) {
         Bestiole b;
-        b.set_strategy(std::make_unique<Gregaire>());
+        //b.set_strategy(std::make_unique<Gregaire>());
         ecosysteme.getMilieu().addMember(b,1);
 
     for (int i = 0; i < multiCount; ++i) {
         Bestiole b;
         //b.set_strategy(std::make_unique<Multi>());
-        ecosysteme.getMilieu().addMember(b);
+        ecosysteme.getMilieu().addMember(b,5);
     }
 
     }

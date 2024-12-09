@@ -10,8 +10,10 @@
 #include "Peureuse.h"
 #include "Gregaire.h"
 
+#include <thread>
 #include <cstdlib>
 #include <cmath>
+
 
 
 const double     Bestiole::AFF_SIZE = 8.;
@@ -53,7 +55,8 @@ Bestiole::Bestiole(std::unique_ptr<IComportementStrategy> &&strategy): strategy_
    hasEar= rand() % 2; 
    hasCamouflage= rand() % 2; 
    hasNageoire= rand() % 2; 
-   hasCarapace= rand() % 2;  
+   hasCarapace= rand() % 2; 
+
    cible = nullptr;
    death = aleatoireEntre(0, 1) ;
    champ_angulaire = aleatoireEntre(CHAMP_ANGULAIRE_MIN, CHAMP_ANGULAIRE_MAX) ;
@@ -84,13 +87,15 @@ Bestiole::Bestiole(const Bestiole & b)
     cumulY = 0.;
     orientation = b.orientation;
     vitesse = b.vitesse;
-   
+    
     hasEye = b.hasEye;               
     hasEar = b.hasEar;               
     hasCamouflage = b.hasCamouflage; 
     hasNageoire = b.hasNageoire;     
     hasCarapace = b.hasCarapace;     
-
+  
+    
+    
     
     champ_angulaire = b.champ_angulaire;           
     distance_yeux = b.distance_yeux;                
@@ -112,6 +117,8 @@ Bestiole::Bestiole(const Bestiole & b)
 
 Bestiole::~Bestiole( void )
 {
+
+   
 
    delete[] couleur;
 
@@ -438,3 +445,5 @@ void Bestiole::setOrientation(double _orientation){
  double Bestiole::getVitesse(){
    return vitesse;
  }
+
+
