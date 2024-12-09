@@ -14,18 +14,18 @@ Prevoyant prevoyantBehavior;
 Gregaire gregaireBehavior;
 
 
-    // 获取当前时间戳
-    static double elapsedTime = 0.0;       // 用于累积时间
-    const double deltaTime = 0.1;          // 每次调用时间步长
+    // Get current timestamp
+    static double elapsedTime = 0.0;       // For accumulating time
+    const double deltaTime = 0.1;          // Time step per call
     elapsedTime += deltaTime;
 
-    // 切换行为的时间间隔（以秒为单位）
+    // Time interval for switching behavior (in seconds)
     const double behaviorSwitchInterval = 0.2;
 
-    // 计算当前行为索引
+    // Calculate the current behavior index
     int behaviorIndex = static_cast<int>(elapsedTime / behaviorSwitchInterval) % 4;
 
-    // 根据行为索引调用不同的行为
+    // Calling different behaviors based on the behavior index
     switch (behaviorIndex) {
         case 0:
             peureuseBehavior.behavior(b, milieu);
