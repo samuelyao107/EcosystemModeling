@@ -37,7 +37,11 @@ void Aquarium::run( void )
 
    while ( ! is_closed() )
    {
-
+         int gregaire =0;
+         int peureuse =0;
+         int prevoyant=0;
+         int kamikaze=0;
+         int multi=0;
       // cout << "iteration de la simulation" << endl;
 
       if ( is_key() ) {
@@ -45,6 +49,33 @@ void Aquarium::run( void )
          cout << " (" << key() << ")" << endl;
          if ( is_keyESC() ) close();
       }
+
+      for ( auto it = flotte->getListeBestioles().begin(); it != flotte->getListeBestioles().end();it++){
+        
+        auto strategy = it->get()->get_strategyX();
+       
+        std::cout << "Strategy type: " << typeid(strategy).name() << std::endl;
+        if (it->get()->behaviorNb ==4 && !it->get()->hasMultipleBehavior) {
+            gregaire++;
+        } else if (it->get()->behaviorNb ==3 && !it->get()->hasMultipleBehavior) {
+            peureuse++;
+        } else if (it->get()->behaviorNb ==1 && !it->get()->hasMultipleBehavior) {
+            kamikaze++;
+        } else if(it->get()->behaviorNb ==2 && !it->get()->hasMultipleBehavior) {
+            prevoyant++;
+        } else if (it->get()->hasMultipleBehavior){
+          multi++;
+        }
+        else{
+
+        }
+       }
+
+      std::cout<<"Bestioles Kamikazes: "<<kamikaze<<std::endl;
+      std::cout<<"Bestioles Peureuses: "<<peureuse<<std::endl;
+      std::cout<<"Bestioles Prevoyantes: "<<prevoyant<<std::endl;
+      std::cout<<"Bestioles Gregaires: "<<gregaire<<std::endl;
+      std::cout<<"Bestioles avec comportement multiple: "<<multi<<std::endl;
     
       flotte->step();
       display( *flotte );

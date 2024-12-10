@@ -59,7 +59,7 @@ Bestiole::Bestiole(std::unique_ptr<IComportementStrategy> &&strategy): strategy_
    hasNageoire= rand() % 2; 
    hasCarapace= rand() % 2; 
    hasMultipleBehavior = 0;
-
+   behaviorNb =0;
    cible = nullptr;
    death = aleatoireEntre(0, 1) ;
    champ_angulaire = aleatoireEntre(CHAMP_ANGULAIRE_MIN, CHAMP_ANGULAIRE_MAX) ;
@@ -81,7 +81,7 @@ Bestiole::Bestiole(const Bestiole & b)
 {
     identite = ++next;
 
-    cout << "const Bestiole (" << identite << ") par copie" << endl;
+  //  cout << "const Bestiole (" << identite << ") par copie" << endl;
 
     
     x = b.x;
@@ -97,6 +97,7 @@ Bestiole::Bestiole(const Bestiole & b)
     hasNageoire = b.hasNageoire;     
     hasCarapace = b.hasCarapace;     
     hasMultipleBehavior = b. hasMultipleBehavior;
+    behaviorNb = b.behaviorNb;
     
     
     
@@ -125,7 +126,7 @@ Bestiole::~Bestiole( void )
 
    delete[] couleur;
 
-   cout << "dest Bestiole" << endl;
+  // cout << "dest Bestiole" << endl;
 
 }
 
@@ -442,7 +443,9 @@ void Bestiole::applyStrategy(Bestiole & b, Milieu & m){
 }  
 
 
-
+  IComportementStrategy* Bestiole::get_strategyX(){
+        return strategy_.get();
+    }
 
 double Bestiole::getOrientation(){
    return orientation;

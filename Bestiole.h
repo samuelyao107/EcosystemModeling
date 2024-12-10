@@ -20,6 +20,7 @@ class Bestiole
 {
 public:
    bool hasMultipleBehavior;
+   int  behaviorNb;
 private :
    static const double     AFF_SIZE;
    static const double     MAX_VITESSE;
@@ -147,6 +148,8 @@ public :                                           // Forme canonique :
    Bestiole* cible  ;
 
    void setColorByBehavior();
+
+   IComportementStrategy* get_strategyX();
 
   
 

@@ -17,11 +17,12 @@ int main()
     Aquarium ecosysteme(1280, 720, 30);
 
     // Total number of Bestiole
-    const int totalBestioles = 50;
+     int totalBestioles = 50;
 
     // User input for percentages
     int kamikazePercent, prevoyantPercent, peureusePercent, gregairePercent, multiPercent;
-
+    std::cout << "Enter the number of Bestioles: "<<std::endl;
+    std::cin >> totalBestioles;
     std::cout << "Enter the percentage of Kamikaze Bestioles: "<<std::endl;
     std::cin >> kamikazePercent;
 
@@ -63,24 +64,28 @@ int main()
     for (int i = 0; i < kamikazeCount; ++i) {
         Bestiole b;
         b.set_strategy(std::make_unique<Kamikaze>());
+        b.behaviorNb =1;
         ecosysteme.getMilieu().addMember(b);
     }
 
     for (int i = 0; i < prevoyantCount; ++i) {
         Bestiole b;
         b.set_strategy(std::make_unique<Prevoyant>());
+         b.behaviorNb =2;
         ecosysteme.getMilieu().addMember(b);
     }
 
     for (int i = 0; i < peureuseCount; ++i) {
         Bestiole b;
         b.set_strategy(std::make_unique<Peureuse>());
+         b.behaviorNb =3;
         ecosysteme.getMilieu().addMember(b);
     }
 
     for (int i = 0; i < gregaireCount; ++i) {
         Bestiole b;
         b.set_strategy(std::make_unique<Gregaire>());
+        b.behaviorNb =4;
         ecosysteme.getMilieu().addMember(b);
     }
 
