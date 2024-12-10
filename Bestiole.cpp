@@ -1,3 +1,5 @@
+#include <chrono>
+#include <functional>
 #include "Bestiole.h"
 
 
@@ -56,6 +58,7 @@ Bestiole::Bestiole(std::unique_ptr<IComportementStrategy> &&strategy): strategy_
    hasCamouflage= rand() % 2; 
    hasNageoire= rand() % 2; 
    hasCarapace= rand() % 2; 
+   hasMultipleBehavior = 0;
 
    cible = nullptr;
    death = aleatoireEntre(0, 1) ;
@@ -93,7 +96,7 @@ Bestiole::Bestiole(const Bestiole & b)
     hasCamouflage = b.hasCamouflage; 
     hasNageoire = b.hasNageoire;     
     hasCarapace = b.hasCarapace;     
-  
+    hasMultipleBehavior = b. hasMultipleBehavior;
     
     
     
@@ -334,7 +337,9 @@ void Bestiole::setColorByBehavior() {
 }
 
 
-
+ std::unique_ptr<IComportementStrategy>& Bestiole::get_strategy() {
+    return strategy_;
+}
 double Bestiole::getX() const{
    return x;
 }
@@ -428,11 +433,16 @@ void Bestiole::set_strategy(std::unique_ptr<IComportementStrategy> &&strategy)
         strategy_ = std::move(strategy);
         setColorByBehavior();
     }
+
+
 void Bestiole::applyStrategy(Bestiole & b, Milieu & m){
    if(strategy_){
       strategy_->behavior(b, m);
    }
 }  
+
+
+
 
 double Bestiole::getOrientation(){
    return orientation;

@@ -6,7 +6,7 @@
 
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
-
+int Milieu::stepNumber=0;
 Milieu::Milieu( int _width, int _height ) : UImg( _width, _height, 1, 3 ),
                                             width(_width), height(_height)
 {
@@ -39,6 +39,17 @@ void Milieu::step(void)
       //std::vector<Bestiole>::iterator
   
     for ( auto it = listeBestioles.begin(); it != listeBestioles.end();it++){
+        if(it->get()->hasMultipleBehavior && stepNumber%100==0){
+        if (dynamic_cast<Gregaire*>(it->get()->get_strategy().get())) {
+            (*it)->set_strategy(std::make_unique<Peureuse>());
+        } else if (dynamic_cast<Peureuse*>(it->get()->get_strategy().get())) {
+            (*it)->set_strategy(std::make_unique<Kamikaze>());
+        } else if (dynamic_cast<Kamikaze*>(it->get()->get_strategy().get())) {
+            (*it)->set_strategy(std::make_unique<Prevoyant>());
+        } else {
+            (*it)->set_strategy(std::make_unique<Gregaire>());
+        }
+        }
         it->get()->applyStrategy(**it, *this);
     }
     for ( auto it = listeBestioles.begin(); it != listeBestioles.end();)
@@ -84,6 +95,7 @@ void Milieu::step(void)
             it = listeBestioles.erase(it);
         }
     }
+    stepNumber++;
 }
 
 

@@ -8,7 +8,6 @@
 #include "Peureuse.h"
 #include "Kamikaze.h"
 #include "Prevoyant.h"
-#include "Multi.h"
 #include <memory>
 #include <iostream>
 #include <vector>
@@ -19,7 +18,8 @@
 
 class Milieu : public UImg
 {
-
+public:
+   static int stepNumber;
 private :
    static const T          white[];
 
@@ -40,13 +40,13 @@ public :
         return listeBestioles;
     }
 
-   void addMember( const Bestiole & b, int i ) {
+   void addMember( const Bestiole & b ) {
       //listeBestioles.push_back(b); listeBestioles.back().initCoords(width, height);
 
         std::unique_ptr<Bestiole> newBestiole = std::make_unique<Bestiole>(b); 
         newBestiole->initCoords(width, height);
         newBestiole->init();
-        if(i == 1){
+        /*if(i == 1){
          newBestiole->set_strategy(std::make_unique<Gregaire>());
         }else if(i==2){
          newBestiole->set_strategy(std::make_unique<Kamikaze>());
@@ -57,7 +57,7 @@ public :
          newBestiole->set_strategy(std::make_unique<Prevoyant>());
         }else{
          newBestiole->set_strategy(std::make_unique<Multi>());
-        }
+        }*/
         listeBestioles.push_back(std::move(newBestiole));
       
       }

@@ -18,7 +18,8 @@ class Milieu;
 
 class Bestiole
 {
-
+public:
+   bool hasMultipleBehavior;
 private :
    static const double     AFF_SIZE;
    static const double     MAX_VITESSE;
@@ -55,6 +56,7 @@ private :
    bool hasCamouflage;
    bool hasNageoire;
    bool hasCarapace;
+   
    
 
 
@@ -129,6 +131,8 @@ public :                                           // Forme canonique :
    void drawCamouflage(UImg& support);
    
    void set_strategy(std::unique_ptr<IComportementStrategy> &&strategy);
+   std::unique_ptr<IComportementStrategy>& get_strategy();
+   
 
    
    void applyStrategy(Bestiole & b, Milieu & m);
