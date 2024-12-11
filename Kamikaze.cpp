@@ -6,7 +6,7 @@
 
 void Kamikaze::behavior(Bestiole& b, Milieu& milieu) {
     
-    if(isCibleInListe(b.cible, milieu.getListeBestioles())){
+    if(!isCibleInListe(b.cible, milieu.getListeBestioles())){
     double distance_min = std::numeric_limits<double>::infinity();
   
 
