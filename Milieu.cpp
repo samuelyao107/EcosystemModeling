@@ -39,15 +39,22 @@ void Milieu::step(void)
       //std::vector<Bestiole>::iterator
   
     for ( auto it = listeBestioles.begin(); it != listeBestioles.end();it++){
+
         if(it->get()->hasMultipleBehavior && stepNumber%100==0){
         if (it->get()->behaviorNb ==1) {
-            (*it)->set_strategy(std::make_unique<Peureuse>());
+            it->get()->set_strategy(std::make_unique<Gregaire>());
+            it->get()->behaviorNb =3;
         } else if (it->get()->behaviorNb ==2) {
-            (*it)->set_strategy(std::make_unique<Kamikaze>());
+            it->get()->set_strategy(std::make_unique<Kamikaze>());
+            it->get()->behaviorNb =1;
         } else if (it->get()->behaviorNb ==3) {
-            (*it)->set_strategy(std::make_unique<Prevoyant>());
-        } else {
-            (*it)->set_strategy(std::make_unique<Gregaire>());
+            it->get()->set_strategy(std::make_unique<Prevoyant>());
+            it->get()->behaviorNb =2;
+        } else if(it->get()->behaviorNb ==4) {
+            it->get()->set_strategy(std::make_unique<Peureuse>());
+            it->get()->behaviorNb =3;
+        }else{
+          
         }
         }
         it->get()->applyStrategy(**it, *this);

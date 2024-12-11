@@ -93,6 +93,7 @@ int main()
         Bestiole b;
         //b.set_strategy(std::make_unique<Gregaire>());
         b.hasMultipleBehavior= 1;
+         b.behaviorNb =1;
         ecosysteme.getMilieu().addMember(b);
     }
 
