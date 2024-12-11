@@ -15,10 +15,10 @@ void Peureuse::behavior(Bestiole & b, Milieu & milieu) {
         }
        
     }
-    if(nb>1){
+    if(nb>2){
         //std::cout<< "Peureuse: "<<nb<<std::endl;
         double orientation = -b.getOrientation();
-        double vitesse = -b.getVitesse();
+        double vitesse = -2*b.getVitesse();
         b.setOrientation(orientation);
         b.setVitesse(vitesse);
     }
