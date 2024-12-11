@@ -57,41 +57,41 @@ int main()
     int kamikazeCount = totalBestioles * kamikazePercent / 100;
     int prevoyantCount = totalBestioles * prevoyantPercent / 100;
     int peureuseCount = totalBestioles * peureusePercent / 100;
-    int gregaireCount = totalBestioles * peureusePercent / 100;
+    int gregaireCount = totalBestioles * gregairePercent/ 100;
     int multiCount = totalBestioles - kamikazeCount - prevoyantCount - peureuseCount - gregaireCount;
 
     // Create and add Bestiole instances
     for (int i = 0; i < kamikazeCount; ++i) {
         Bestiole b;
-        b.set_strategy(std::make_unique<Kamikaze>());
+        //b.set_strategy(std::make_unique<Kamikaze>());
         b.behaviorNb =1;
         ecosysteme.getMilieu().addMember(b);
     }
 
     for (int i = 0; i < prevoyantCount; ++i) {
         Bestiole b;
-        b.set_strategy(std::make_unique<Prevoyant>());
-         b.behaviorNb =2;
+        //b.set_strategy(std::make_unique<Prevoyant>());
+        b.behaviorNb =2;
         ecosysteme.getMilieu().addMember(b);
     }
 
     for (int i = 0; i < peureuseCount; ++i) {
         Bestiole b;
-        b.set_strategy(std::make_unique<Peureuse>());
-         b.behaviorNb =3;
+        //b.set_strategy(std::make_unique<Peureuse>());
+        b.behaviorNb =3;
         ecosysteme.getMilieu().addMember(b);
     }
 
     for (int i = 0; i < gregaireCount; ++i) {
         Bestiole b;
-        b.set_strategy(std::make_unique<Gregaire>());
+        //b.set_strategy(std::make_unique<Gregaire>());
         b.behaviorNb =4;
         ecosysteme.getMilieu().addMember(b);
     }
 
     for (int i = 0; i < multiCount; ++i) {
         Bestiole b;
-        b.set_strategy(std::make_unique<Gregaire>());
+        //b.set_strategy(std::make_unique<Gregaire>());
         b.hasMultipleBehavior= 1;
         ecosysteme.getMilieu().addMember(b);
     }

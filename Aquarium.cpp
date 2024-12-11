@@ -50,11 +50,12 @@ void Aquarium::run( void )
          if ( is_keyESC() ) close();
       }
 
-      for ( auto it = flotte->getListeBestioles().begin(); it != flotte->getListeBestioles().end();it++){
+      for ( auto it = flotte->getListeBestioles().begin(); it != flotte->getListeBestioles().end();it++)
+      {
         
-        auto strategy = it->get()->get_strategyX();
+       // auto strategy = it->get()->get_strategyX();
        
-        std::cout << "Strategy type: " << typeid(strategy).name() << std::endl;
+       
         if (it->get()->behaviorNb ==4 && !it->get()->hasMultipleBehavior) {
             gregaire++;
         } else if (it->get()->behaviorNb ==3 && !it->get()->hasMultipleBehavior) {
@@ -69,6 +70,7 @@ void Aquarium::run( void )
         else{
 
         }
+
        }
 
       std::cout<<"Bestioles Kamikazes: "<<kamikaze<<std::endl;

@@ -13,4 +13,5 @@ void Gregaire::behavior(Bestiole & b, Milieu & milieu) {
     }
     orientation = orientation/nb;
     b.setOrientation(orientation);
+    //std::cout<<"Gregaire en marche"<<std::endl;
 }

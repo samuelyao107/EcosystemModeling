@@ -40,11 +40,11 @@ void Milieu::step(void)
   
     for ( auto it = listeBestioles.begin(); it != listeBestioles.end();it++){
         if(it->get()->hasMultipleBehavior && stepNumber%100==0){
-        if (dynamic_cast<Gregaire*>(it->get()->get_strategy().get())) {
+        if (it->get()->behaviorNb ==1) {
             (*it)->set_strategy(std::make_unique<Peureuse>());
-        } else if (dynamic_cast<Peureuse*>(it->get()->get_strategy().get())) {
+        } else if (it->get()->behaviorNb ==2) {
             (*it)->set_strategy(std::make_unique<Kamikaze>());
-        } else if (dynamic_cast<Kamikaze*>(it->get()->get_strategy().get())) {
+        } else if (it->get()->behaviorNb ==3) {
             (*it)->set_strategy(std::make_unique<Prevoyant>());
         } else {
             (*it)->set_strategy(std::make_unique<Gregaire>());

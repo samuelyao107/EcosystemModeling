@@ -46,18 +46,19 @@ public :
         std::unique_ptr<Bestiole> newBestiole = std::make_unique<Bestiole>(b); 
         newBestiole->initCoords(width, height);
         newBestiole->init();
-        /*if(i == 1){
+        //newBestiole->set_strategy(std::make_unique<Peureuse>());
+        if(newBestiole->behaviorNb== 4){
          newBestiole->set_strategy(std::make_unique<Gregaire>());
-        }else if(i==2){
+        }else if(newBestiole->behaviorNb== 1){
          newBestiole->set_strategy(std::make_unique<Kamikaze>());
         }
-        else if(i==3){
+        else if(newBestiole->behaviorNb== 3){
          newBestiole->set_strategy(std::make_unique<Peureuse>());
-        }else if(i==4){
+        }else if(newBestiole->behaviorNb == 2){
          newBestiole->set_strategy(std::make_unique<Prevoyant>());
         }else{
-         newBestiole->set_strategy(std::make_unique<Multi>());
-        }*/
+         
+        }
         listeBestioles.push_back(std::move(newBestiole));
       
       }

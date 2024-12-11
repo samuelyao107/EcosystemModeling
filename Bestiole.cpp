@@ -55,7 +55,7 @@ Bestiole::Bestiole(std::unique_ptr<IComportementStrategy> &&strategy): strategy_
    vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
    hasEye= rand() % 2; 
    hasEar= rand() % 2; 
-   hasCamouflage= rand() % 2; 
+   hasCamouflage= 0;//rand() % 2; 
    hasNageoire= rand() % 2; 
    hasCarapace= rand() % 2; 
    hasMultipleBehavior = 0;
@@ -437,9 +437,9 @@ void Bestiole::set_strategy(std::unique_ptr<IComportementStrategy> &&strategy)
 
 
 void Bestiole::applyStrategy(Bestiole & b, Milieu & m){
-   if(strategy_){
+   //if(strategy_){
       strategy_->behavior(b, m);
-   }
+   //}
 }  
 
 
